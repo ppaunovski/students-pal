@@ -33,7 +33,7 @@ export default function Semester() {
   //pathname = /semsters/semester/${which semester}
   //pathname.slice(20) returns the number of the semester
   const pathname = window.location.pathname;
-  const semester = pathname.slice(39, 40);
+  const semester = pathname.slice(pathname.length);
 
   const [sem, setSem] = useState("");
   const [semesters, setSemesters] = useState([]);
