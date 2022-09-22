@@ -16,6 +16,7 @@ import Post from "./Post";
 import { listAll, getDownloadURL, ref } from "firebase/storage";
 import { useAuth } from "../contexts/AuthContext";
 import { Box, Button } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import { v4 } from "uuid";
 
 export default function Forum() {
@@ -109,6 +110,15 @@ export default function Forum() {
                 return (
                   <Box key={p.id}>
                     <Post post={p.data} postId={p.id} />
+                    <Box
+                      sx={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {hasMore && <CircularProgress />}
+                    </Box>
                     <div ref={lastPostElementRef}></div>
                   </Box>
                 );
@@ -117,6 +127,7 @@ export default function Forum() {
               }
             })}
           </div>
+
           {/* <Button onClick={getPosts}>Load more</Button> */}
         </Container>
       </Container>

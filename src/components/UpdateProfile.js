@@ -16,6 +16,7 @@ function UpdateProfile() {
   const [loading, setLoading] = useState(false);
   const [uploadPic, setUploadPic] = useState(null);
   const [profilePic, setProfilePic] = useState(null);
+  const [loadingPP, setLoadingPP] = useState(false);
   const navigate = useNavigate();
 
   const userRef = doc(db, "users", `${currentUser.email}`);
@@ -52,6 +53,7 @@ function UpdateProfile() {
   }
 
   const uploadProfilePic = async () => {
+    setLoadingPP(true);
     if (uploadPic === null) return;
 
     const profilePicRef = ref(
@@ -61,6 +63,8 @@ function UpdateProfile() {
     uploadBytes(profilePicRef, uploadPic).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         setProfilePic(url);
+        console.log("done");
+        setLoadingPP(false);
       });
     });
 
@@ -104,14 +108,16 @@ function UpdateProfile() {
                   type="file"
                   accept="image"
                 ></Form.Control>
-                <Button onClick={uploadProfilePic}>Upload</Button>
+                <Button disabled={loadingPP} onClick={uploadProfilePic}>
+                  Upload
+                </Button>
               </Form.Group>
               <Form.Group id="email">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
                   ref={emailRef}
-                  defaultValue={currentUser.email}
+                  //defaultValue={currentUser.email}
                 ></Form.Control>
               </Form.Group>
               <Form.Group id="password">
@@ -130,7 +136,11 @@ function UpdateProfile() {
                   placeholder="Leave blank to keep the same"
                 ></Form.Control>
               </Form.Group>
-              <Button disabled={loading} className="w-100 mt-3" type="submit">
+              <Button
+                disabled={loading && loadingPP}
+                className="w-100 mt-3"
+                type="submit"
+              >
                 Update
               </Button>
             </Form>
