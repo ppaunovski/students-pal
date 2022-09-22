@@ -86,6 +86,7 @@ function Chat({ sender, recipient, setReload }) {
 
   useEffect(() => {
     if (refresh) {
+      console.log("inside useeff");
       setOrderedMsgs([]);
       getMess();
 
@@ -93,16 +94,17 @@ function Chat({ sender, recipient, setReload }) {
         const ppRecipient = await getDoc(doc(db, "users", `${recipient}`));
         setRecipientPP(ppRecipient.data());
         const ppSender = await getDoc(doc(db, "users", `${sender}`));
-        setSenderPP(ppSender);
+        setSenderPP(ppSender.data());
       };
 
       getPP();
       setRefresh(false);
+      console.log(refresh, orderedMsgs, recipientPP, senderPP);
     }
   }, [refresh]);
 
-  const handleSend = async (e) => {
-    e.preventDefault();
+  const handleSend = async () => {
+    console.log("inside handleSend", refresh, senderPP, recipientPP);
 
     await addDoc(messagesCollectionRef, {
       message: message,
@@ -110,24 +112,14 @@ function Chat({ sender, recipient, setReload }) {
       sender: sender,
       createdAt: serverTimestamp(),
     });
-    await setDoc(doc(db, "users", `${currentUser.email}`, "chats", id), {
-      chatter: currentUser.email === sender ? recipient : sender,
-      chatterPP:
-        currentUser.email === sender ? recipientPP.ppurl : senderPP.ppurl,
+    await setDoc(doc(db, "users", `${sender}`, "chats", id), {
+      chatter: recipient,
+      chatterPP: recipientPP.ppurl,
     });
-    await setDoc(
-      doc(
-        db,
-        "users",
-        `${currentUser.email === sender ? recipient : sender}`,
-        "chats",
-        id
-      ),
-      {
-        chatter: currentUser.email,
-        chatterPP: senderPP.ppurl,
-      }
-    );
+    await setDoc(doc(db, "users", `${recipient}`, "chats", id), {
+      chatter: sender,
+      chatterPP: senderPP.ppurl,
+    });
     setMessage("");
     setAddedNewMess(true);
     setRefresh(true);
@@ -262,7 +254,13 @@ function Chat({ sender, recipient, setReload }) {
           }}
         >
           <TextField
-            type="text"
+            type="submit"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                handleSend();
+              }
+            }}
             variant="standard"
             sx={{ width: "55vw" }}
             multiline
