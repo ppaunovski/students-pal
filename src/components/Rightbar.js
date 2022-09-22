@@ -17,11 +17,20 @@ import { v4 } from "uuid";
 function Rightbar() {
   const { currentUser } = useAuth();
   const [onlineUsers, setOnlineUsers] = useState([]);
+  const [users, setUsers] = useState([]);
   useEffect(() => {
     const getOnlineUsers = async () => {
-      const users = await getDocs(collection(db, "onlineUsers"));
+      const ou = await getDocs(collection(db, "onlineUsers"));
       setOnlineUsers(
-        users.docs.map((user) => ({
+        ou.docs.map((user) => ({
+          data: { ...user.data() },
+          id: user.id,
+          key: user.id,
+        }))
+      );
+      const u = await getDocs(collection(db, "users"));
+      setUsers(
+        u.docs.map((user) => ({
           data: { ...user.data() },
           id: user.id,
           key: user.id,
@@ -45,6 +54,7 @@ function Rightbar() {
             <h5>Online Users</h5>
           </ListItem>
           {onlineUsers.map((user) => {
+            let pp = users.filter((u) => u.id === user.id);
             return user.id !== currentUser.email ? (
               <Link
                 key={user.id}
@@ -85,11 +95,13 @@ function Rightbar() {
                           ></div>
                         }
                       >
-                        <Avatar
-                          sx={{ width: 34, height: 34 }}
-                          src={user.id}
-                          alt={user.id}
-                        />
+                        {pp[0] && (
+                          <Avatar
+                            sx={{ width: 34, height: 34 }}
+                            src={pp[0].data.ppurl}
+                            alt={user.id}
+                          />
+                        )}
                       </Badge>
                     )}
                     <p
