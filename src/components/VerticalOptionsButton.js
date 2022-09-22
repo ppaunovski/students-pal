@@ -107,6 +107,7 @@ function VerticalOptionsButton({
   commentId,
   file,
   subject,
+  filePath,
 }) {
   const storage = getStorage();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -125,10 +126,12 @@ function VerticalOptionsButton({
       await deleteComments();
     }
     await deleteDoc(doc(db, "posts", postId));
+    window.location.reload();
   };
 
   const handleDeleteOfComment = async () => {
     await deleteDoc(doc(db, "posts", postId, "comments", commentId));
+    window.location.reload();
   };
 
   const handleDeleteOfFile = async () => {
@@ -137,6 +140,17 @@ function VerticalOptionsButton({
     await deleteDoc(
       doc(db, "subjects", `${subject}`, "files", `${file.fileId}`)
     );
+    window.location.reload();
+  };
+
+  const handleDeleteOfPostWithFile = async () => {
+    if (comments.length !== 0) {
+      await deleteComments();
+    }
+    const fileRef = ref(storage, post.filePath);
+    await deleteObject(fileRef);
+    await deleteDoc(doc(db, "posts", postId));
+    window.location.reload();
   };
 
   return (
@@ -202,6 +216,8 @@ function VerticalOptionsButton({
                 ? handleDeleteOfComment
                 : calledFrom === "subjectFileCard"
                 ? handleDeleteOfFile
+                : calledFrom === "postWithFile"
+                ? handleDeleteOfPostWithFile
                 : ""
             }
             endIcon={<CheckIcon />}

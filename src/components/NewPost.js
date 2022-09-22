@@ -11,6 +11,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 import {
   addDoc,
   collection,
@@ -46,6 +47,7 @@ export default function NewPost({ setRefresh }) {
   const [fileUrl, setFileUrl] = useState("");
   const [fileId, setFileId] = useState("");
   const [hasImage, setHasImage] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [profilePicture, setProfilePicture] = useState({});
 
@@ -60,12 +62,12 @@ export default function NewPost({ setRefresh }) {
   }, []);
 
   const createPost = async () => {
+    setLoading(true);
     if (file === null) {
       setFileId(`${v4()}`);
     } else {
       setFileId(`${file.name + v4()}`);
     }
-    setOpen(false);
   };
 
   useEffect(() => {
@@ -96,13 +98,17 @@ export default function NewPost({ setRefresh }) {
           postedAt: serverTimestamp(),
           hasImage: hasImage,
           imageUrl: fileUrl,
+          filePath: `${auth.currentUser.email}/${fileId}`,
         });
 
         setRefresh(true);
       }
     };
     postIt();
+    setFile(null);
     setPost("");
+    setLoading(false);
+    setOpen(false);
   }, [fileUrl]);
 
   return (
@@ -152,7 +158,13 @@ export default function NewPost({ setRefresh }) {
             </IconButton>
             <span>{file === null ? "" : file.name}</span>
           </Stack>
-          <Button onClick={createPost}>Post</Button>
+          {loading ? (
+            <LoadingButton loading variant="outlined" disabled>
+              Posting...
+            </LoadingButton>
+          ) : (
+            <Button onClick={createPost}>Post</Button>
+          )}
         </Box>
       </StyledModal>
       <Box

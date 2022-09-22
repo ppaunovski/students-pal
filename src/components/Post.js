@@ -196,7 +196,7 @@ export default function Post(props) {
           auth.currentUser.email === props.post.author ? (
             <div>
               <VerticalOptionsButton
-                calledFrom={"post"}
+                calledFrom={props.hasImage ? "post" : "postWithFile"}
                 post={props.post}
                 comments={comments}
                 postId={props.postId}

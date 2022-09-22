@@ -10,7 +10,7 @@ import {
   Fab,
   Card,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { useDropzone } from "react-dropzone";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -21,6 +21,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { display } from "@mui/system";
+import { LoadingButton } from "@mui/lab";
 
 const StyledModal = styled(Modal)({
   display: "flex",
@@ -31,6 +32,9 @@ const StyledModal = styled(Modal)({
 function UploadFile(props) {
   const [modal, setModal] = useState(props.modal);
   const [filesToUpload, setFilesToUpload] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [readyToUpload, setReadyToUpload] = useState(false);
+  const [readyToClose, setReadyToClose] = useState(false);
   const storage = getStorage();
   const { currentUser } = useAuth();
 
@@ -46,7 +50,11 @@ function UploadFile(props) {
   };
 
   const uploadFiles = async () => {
-    if (filesToUpload === null) return;
+    setLoading(true);
+    if (filesToUpload === null) {
+      setLoading(false);
+      return;
+    }
 
     filesToUpload.map((file) => {
       const fileId = `${file.name + v4()}`;
@@ -65,14 +73,22 @@ function UploadFile(props) {
                 author: currentUser.email,
               }
             );
+            console.log("done");
+            setLoading(false);
+            window.location.reload();
           };
 
           addDocument();
         });
       });
     });
-    setModal(false);
   };
+
+  useEffect(() => {
+    if (loading === false) {
+      setModal(false);
+    }
+  }, [loading]);
 
   return (
     <Box>
@@ -86,7 +102,7 @@ function UploadFile(props) {
       </Fab>
       <StyledModal
         open={modal}
-        onClose={(e) => setModal(false)}
+        //onClose={(e) => setModal(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -155,9 +171,13 @@ function UploadFile(props) {
                   })}
               </List>
             </Box>
-            <Button variant="contained" onClick={uploadFiles}>
+            <LoadingButton
+              onClick={uploadFiles}
+              loading={loading}
+              variant="contained"
+            >
               Upload
-            </Button>
+            </LoadingButton>
           </Box>
         </Box>
       </StyledModal>
