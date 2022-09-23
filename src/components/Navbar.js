@@ -16,11 +16,12 @@ import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import ForumIcon from "@mui/icons-material/Forum";
-import { ListItemIcon, ListItemText } from "@mui/material";
+import { ListItemIcon, ListItemText, Modal } from "@mui/material";
 import ListIcon from "@mui/icons-material/List";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ChatIcon from "@mui/icons-material/Chat";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 const Navbar = () => {
   const { currentUser, logout } = useAuth();
@@ -28,6 +29,7 @@ const Navbar = () => {
   const [error, setError] = useState("");
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [open, setOpen] = useState(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -38,6 +40,9 @@ const Navbar = () => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+  const openAbout = () => {
+    setOpen(true);
   };
 
   const handleCloseUserMenu = () => {
@@ -155,6 +160,13 @@ const Navbar = () => {
                   <ListItemText>Semesters</ListItemText>
                 </MenuItem>
               </Link>
+
+              <MenuItem onClick={handleCloseNavMenu && openAbout}>
+                <ListItemIcon>
+                  <InfoOutlinedIcon fontSize="small" />
+                </ListItemIcon>
+                <ListItemText>About</ListItemText>
+              </MenuItem>
             </Menu>
           </Box>
 
@@ -208,6 +220,13 @@ const Navbar = () => {
                 Semesters
               </Button>
             </Link>
+
+            <Button
+              onClick={handleCloseNavMenu && openAbout}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              About
+            </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -265,6 +284,47 @@ const Navbar = () => {
           </Box>
         </Toolbar>
       </Container>
+      <Modal
+        open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+            bgcolor: "background.paper",
+            border: "2px solid #000",
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            About FINKI Studet's Pal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            This web application is created as a faculty project for the Faculty
+            of Computer Science &amp; Engineering of Skopje (
+            <a href="https://www.finki.ukim.mk/mk" target="_blank">
+              FINKI
+            </a>
+            ), Macedonia. It was built using React and Firebase for the
+            functionality, Material UI and Bootstrap for the visuals.
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Created by:{" "}
+            <a href="https://github.com/ppaunovski" target="_blank">
+              Pavel Paunovski
+            </a>
+          </Typography>
+        </Box>
+      </Modal>
     </AppBar>
   );
 };

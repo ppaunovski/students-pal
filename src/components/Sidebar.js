@@ -23,82 +23,86 @@ function Sidebar() {
       }}
     >
       <Box sx={{ position: "fixed" }}>
-        <h5>Корисни линкови</h5>
-        <List>
-          <ListItem disablePadding>
-            <ListItemText primary="Сервиси на Финки" />
-          </ListItem>
-          <a
-            style={{ textDecoration: "none", color: "black" }}
-            href="https://www.finki.ukim.mk/"
-            target="_blank"
-          >
+        <Box sx={{ maxWidth: "20vw" }}>
+          <h5 style={{ overflow: "hidden", textOverflow: "ellipsis" }}>
+            Корисни линкови
+          </h5>
+          <List>
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <AccountBalanceIcon />
-                </ListItemIcon>
-                <ListItemText primary="Финки" />
-              </ListItemButton>
+              <ListItemText primary="Сервиси на Финки" />
             </ListItem>
-          </a>
-          <a
-            style={{ textDecoration: "none", color: "black" }}
-            href="https://www.iknow.ukim.mk/"
-            target="_blank"
-          >
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <GradingIcon />
-                </ListItemIcon>
-                <ListItemText primary="Iknow" />
-              </ListItemButton>
-            </ListItem>
-          </a>
-          <a
-            style={{ textDecoration: "none", color: "black" }}
-            href="https://courses.finki.ukim.mk/"
-            target="_blank"
-          >
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <SchoolIcon />
-                </ListItemIcon>
-                <ListItemText primary="Курсеви" />
-              </ListItemButton>
-            </ListItem>
-          </a>
-          <a
-            style={{ textDecoration: "none", color: "black" }}
-            href="https://ispiti.finki.ukim.mk/"
-            target="_blank"
-          >
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <QuizIcon />
-                </ListItemIcon>
-                <ListItemText primary="Испити" />
-              </ListItemButton>
-            </ListItem>
-          </a>
-          <a
-            style={{ textDecoration: "none", color: "black" }}
-            href="https://finki.edupage.org/timetable/"
-            target="_blank"
-          >
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <CalendarMonthIcon />
-                </ListItemIcon>
-                <ListItemText primary="Распоред" />
-              </ListItemButton>
-            </ListItem>
-          </a>
-        </List>
+            <a
+              style={{ textDecoration: "none", color: "black" }}
+              href="https://www.finki.ukim.mk/"
+              target="_blank"
+            >
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <AccountBalanceIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Финки" />
+                </ListItemButton>
+              </ListItem>
+            </a>
+            <a
+              style={{ textDecoration: "none", color: "black" }}
+              href="https://www.iknow.ukim.mk/"
+              target="_blank"
+            >
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <GradingIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Iknow" />
+                </ListItemButton>
+              </ListItem>
+            </a>
+            <a
+              style={{ textDecoration: "none", color: "black" }}
+              href="https://courses.finki.ukim.mk/"
+              target="_blank"
+            >
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <SchoolIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Курсеви" />
+                </ListItemButton>
+              </ListItem>
+            </a>
+            <a
+              style={{ textDecoration: "none", color: "black" }}
+              href="https://ispiti.finki.ukim.mk/"
+              target="_blank"
+            >
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <QuizIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Испити" />
+                </ListItemButton>
+              </ListItem>
+            </a>
+            <a
+              style={{ textDecoration: "none", color: "black" }}
+              href="https://finki.edupage.org/timetable/"
+              target="_blank"
+            >
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <CalendarMonthIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Распоред" />
+                </ListItemButton>
+              </ListItem>
+            </a>
+          </List>
+        </Box>
       </Box>
     </Box>
   );

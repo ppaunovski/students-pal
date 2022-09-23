@@ -52,7 +52,15 @@ function Message({ message, sender, createdAt, senderPP, recipientPP }) {
         {sender !== currentUser.email && <Avatar src={recipientPP} />}
         <div style={style}>
           <div className="msg_wrapper" style={style_wrapper}>
-            <h6 style={{ padding: "2px", overflowX: "hidden" }}>{sender}</h6>
+            <h6
+              style={{
+                padding: "2px",
+                overflowX: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {sender}
+            </h6>
             <p
               style={{
                 padding: "0 10px",

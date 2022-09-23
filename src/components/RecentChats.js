@@ -55,7 +55,8 @@ function RecentChats({ setRefresh }) {
                       gap: "10px",
                       padding: "0",
                       margin: "0",
-                      justifyContent: "center",
+                      justifyContent: "start",
+                      maxWidth: "20vw",
                     }}
                   >
                     {chat.data.chatterPP && (
@@ -95,7 +96,6 @@ function RecentChats({ setRefresh }) {
                     )}
                     <p
                       style={{
-                        width: "100px",
                         textOverflow: "ellipsis",
                         whiteSpace: "nowrap",
                         overflow: "hidden",
