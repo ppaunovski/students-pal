@@ -6,9 +6,8 @@ import {
   ListItem,
   ListItemButton,
 } from "@mui/material";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { Prev } from "react-bootstrap/esm/PageItem";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { Link } from "react-router-dom";
@@ -44,12 +43,7 @@ function RecentChats({ setRefresh }) {
             return (
               <Link
                 key={chat.data.chatter}
-                // to={`/profile/${chat.data.chatter}/message`}
                 to={`/messenger/${currentUser.email}/${chat.data.chatter}`}
-                state={{
-                  sender: currentUser.email,
-                  recipient: chat.data.chatter,
-                }}
                 style={{ textDecoration: "none", color: "black" }}
                 onClick={() => setRefresh(false)}
               >

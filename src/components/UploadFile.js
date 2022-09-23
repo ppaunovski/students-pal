@@ -1,8 +1,6 @@
 import {
-  Button,
   Modal,
   styled,
-  Typography,
   Box,
   List,
   ListItem,
@@ -20,7 +18,6 @@ import { v4 } from "uuid";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
-import { display } from "@mui/system";
 import { LoadingButton } from "@mui/lab";
 
 const StyledModal = styled(Modal)({
@@ -33,8 +30,6 @@ function UploadFile(props) {
   const [modal, setModal] = useState(props.modal);
   const [filesToUpload, setFilesToUpload] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [readyToUpload, setReadyToUpload] = useState(false);
-  const [readyToClose, setReadyToClose] = useState(false);
   const storage = getStorage();
   const { currentUser } = useAuth();
 
@@ -102,7 +97,6 @@ function UploadFile(props) {
       </Fab>
       <StyledModal
         open={modal}
-        //onClose={(e) => setModal(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >

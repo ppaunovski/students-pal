@@ -14,25 +14,6 @@ import {
 } from "@mui/material";
 
 export default function Semesters() {
-  const [semester, setSemester] = useState(null);
-  const [semesters, setSemesters] = useState([]);
-  const semCollectionRef = collection(db, "semesters");
-  useEffect(() => {
-    const getSub = async () => {
-      const data = await getDocs(semCollectionRef);
-
-      setSemesters(
-        data.docs.map((doc) => ({ data: { ...doc.data() }, id: doc.id }))
-      );
-    };
-
-    getSub();
-  }, [semester]);
-
-  const setAllProps = async (sem) => {
-    setSemester(sem);
-  };
-
   return (
     <>
       <Navbar />
@@ -56,9 +37,6 @@ export default function Semesters() {
           <Link
             style={{ textDecoration: "none", color: "black" }}
             to="/semesters/semester/1"
-            state={{
-              semester: 1,
-            }}
           >
             <ListItem>
               <ListItemButton>
@@ -70,9 +48,6 @@ export default function Semesters() {
           <Link
             style={{ textDecoration: "none", color: "black" }}
             to="/semesters/semester/2"
-            state={{
-              semester: 2,
-            }}
           >
             <ListItem>
               <ListItemButton>
@@ -84,9 +59,6 @@ export default function Semesters() {
           <Link
             style={{ textDecoration: "none", color: "black" }}
             to="/semesters/semester/3"
-            state={{
-              semester: 3,
-            }}
           >
             <ListItem>
               <ListItemButton>
@@ -98,9 +70,6 @@ export default function Semesters() {
           <Link
             style={{ textDecoration: "none", color: "black" }}
             to="/semesters/semester/4"
-            state={{
-              semester: 4,
-            }}
           >
             <ListItem>
               <ListItemButton>
@@ -112,9 +81,6 @@ export default function Semesters() {
           <Link
             style={{ textDecoration: "none", color: "black" }}
             to="/semesters/semester/5"
-            state={{
-              semester: 5,
-            }}
           >
             <ListItem>
               <ListItemButton>
@@ -126,9 +92,6 @@ export default function Semesters() {
           <Link
             style={{ textDecoration: "none", color: "black" }}
             to="/semesters/semester/6"
-            state={{
-              semester: 6,
-            }}
           >
             <ListItem>
               <ListItemButton>
@@ -140,9 +103,6 @@ export default function Semesters() {
           <Link
             style={{ textDecoration: "none", color: "black" }}
             to="/semesters/semester/7"
-            state={{
-              semester: 7,
-            }}
           >
             <ListItem>
               <ListItemButton>
@@ -154,9 +114,6 @@ export default function Semesters() {
           <Link
             style={{ textDecoration: "none", color: "black" }}
             to="/semesters/semester/8"
-            state={{
-              semester: 8,
-            }}
           >
             <ListItem>
               <ListItemButton>

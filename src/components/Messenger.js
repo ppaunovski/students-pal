@@ -1,13 +1,10 @@
-import { setRef, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import Chat from "./Chat";
 import Navbar from "./Navbar";
 import RecentChats from "./RecentChats";
 
 function Messenger() {
-  // const location = useLocation();
-  // const { sender, recipient } = location.state;
   const countNextSlash = (pathname) => {
     let slashes = 0;
     let i = 0;
@@ -27,7 +24,6 @@ function Messenger() {
   useEffect(() => {
     if (!refresh) {
       setRefresh(true);
-      //window.location.reload();
     }
   }, [refresh]);
 

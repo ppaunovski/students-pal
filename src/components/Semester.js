@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   arrayUnion,
   collection,
-  getDoc,
   getDocs,
   updateDoc,
   doc,
@@ -13,7 +12,6 @@ import {
   Box,
   Button,
   CardActions,
-  Input,
   List,
   ListItem,
   ListItemButton,
@@ -21,23 +19,16 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Link, useLocation } from "react-router-dom";
-import { useTheme } from "@emotion/react";
+import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import AddIcon from "@mui/icons-material/Add";
 
 export default function Semester() {
-  // const location = useLocation();
-  // const { semester } = location;
-
-  //pathname = /semsters/semester/${which semester}
-  //pathname.slice(20) returns the number of the semester
   const pathname = window.location.pathname;
   const semester = pathname.slice(pathname.length - 1);
 
   const [sem, setSem] = useState("");
   const [semesters, setSemesters] = useState([]);
-  const [subjects, setSubjects] = useState({});
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
@@ -62,8 +53,6 @@ export default function Semester() {
   if (semesters[sem - 1]) {
     currentSubjects = semesters[sem - 1].data.subjects;
   }
-
-  const semesterCollectionRef = doc(db, "semesters", `${semester}`);
 
   const [addSubject, setAddSubject] = useState(false);
   const [newSubjectsTitle, setNewSubjectsTitle] = useState("");

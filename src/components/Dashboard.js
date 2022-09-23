@@ -1,16 +1,7 @@
 import React, { useState } from "react";
-import { Alert, Button, Card } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import {
-  Link,
-  useNavigate,
-  BrowserRouter as Router,
-  Route,
-} from "react-router-dom";
-import Navigation from "./Navigation";
-import Profile from "./Profile";
+import { useNavigate } from "react-router-dom";
 import Forum from "./Forum";
-import Semesters from "./Semesters";
 import { Stack, Box } from "@mui/material";
 import Sidebar from "./Sidebar";
 import Rightbar from "./Rightbar";

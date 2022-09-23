@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-// import { Form, Button } from "react-bootstrap";
 import {
   Avatar,
   Box,
   Button,
-  Card,
   Fab,
   IconButton,
   Modal,
@@ -12,14 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
-import {
-  addDoc,
-  collection,
-  serverTimestamp,
-  getDoc,
-  doc,
-  setDoc,
-} from "firebase/firestore";
+import { serverTimestamp, getDoc, doc, setDoc } from "firebase/firestore";
 import { db, auth, storage } from "../firebase";
 import { Stack, styled } from "@mui/system";
 import PhotoOutlinedIcon from "@mui/icons-material/PhotoOutlined";
@@ -188,26 +179,5 @@ export default function NewPost({ setRefresh }) {
         </div>
       </Box>
     </Box>
-
-    //-------------------------------
-    // <>
-    //   <Form>
-    //     <Form.Group>
-    //       <TextField
-    //         value={post}
-    //         placeholder="What's on your mind?"
-    //         fullWidth
-    //         variant="standard"
-    //         multiline
-    //         onChange={(event) => {
-    //           setPost(event.target.value);
-    //         }}
-    //       ></TextField>
-    //     </Form.Group>
-    //     <Button className="mt-2" onClick={createPost}>
-    //       Post
-    //     </Button>
-    //   </Form>
-    // </>
   );
 }

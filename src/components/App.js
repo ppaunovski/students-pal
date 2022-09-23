@@ -19,10 +19,7 @@ import Messenger from "./Messenger";
 
 function App() {
   return (
-    <
-      // className="d-flex align-items-center justify-content-center"
-      // style={{ minHeight: "100vh" }}
-    >
+    <>
       <div>
         <Router basename={`/${process.env.PUBLIC_URL}`}>
           <AuthProvider>
@@ -96,14 +93,7 @@ function App() {
                   </PrivateRoute>
                 }
               />
-              {/* <Route
-                path="/semesters/semester1"
-                element={
-                  <PrivateRoute>
-                    <Semester />
-                  </PrivateRoute>
-                }
-              /> */}
+
               <Route
                 path="/semesters/semester/:id"
                 element={
@@ -112,54 +102,6 @@ function App() {
                   </PrivateRoute>
                 }
               />
-              {/* <Route
-                path="/semesters/semester3"
-                element={
-                  <PrivateRoute>
-                    <Semester />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/semesters/semester4"
-                element={
-                  <PrivateRoute>
-                    <Semester />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/semesters/semester5"
-                element={
-                  <PrivateRoute>
-                    <Semester />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/semesters/semester6"
-                element={
-                  <PrivateRoute>
-                    <Semester />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/semesters/semester7"
-                element={
-                  <PrivateRoute>
-                    <Semester />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/semesters/semester8"
-                element={
-                  <PrivateRoute>
-                    <Semester />
-                  </PrivateRoute>
-                }
-              /> */}
 
               <Route
                 path={"/semesters/semester/:id/subject/:id"}
@@ -169,62 +111,6 @@ function App() {
                   </PrivateRoute>
                 }
               />
-              {/* <Route
-                path={"/semesters/semester2/subject"}
-                element={
-                  <PrivateRoute>
-                    <SubjectPage />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path={"/semesters/semester3/subject"}
-                element={
-                  <PrivateRoute>
-                    <SubjectPage />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path={"/semesters/semester4/subject"}
-                element={
-                  <PrivateRoute>
-                    <SubjectPage />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path={"/semesters/semester5/subject"}
-                element={
-                  <PrivateRoute>
-                    <SubjectPage />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path={"/semesters/semester6/subject"}
-                element={
-                  <PrivateRoute>
-                    <SubjectPage />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path={"/semesters/semester7/subject"}
-                element={
-                  <PrivateRoute>
-                    <SubjectPage />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path={"/semesters/semester8/subject"}
-                element={
-                  <PrivateRoute>
-                    <SubjectPage />
-                  </PrivateRoute>
-                }
-              /> */}
 
               <Route
                 path="/signup"

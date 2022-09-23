@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { useLocation } from "react-router-dom";
-import Navbar from "./Navbar";
+
 import Message from "./Message";
-import Form from "react-bootstrap/Form";
 import {
   getDoc,
   doc,
@@ -13,15 +11,18 @@ import {
   orderBy,
   limit,
   serverTimestamp,
-  onSnapshot,
-  QuerySnapshot,
   getDocs,
   startAfter,
-  startAt,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
-import { Avatar, Box, Button, TextField } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  CircularProgress,
+  TextField,
+} from "@mui/material";
 import { v4 } from "uuid";
 import CustomizedMenus from "./CustomizedMenus";
 //
@@ -38,8 +39,6 @@ function Chat({ sender, recipient, setReload }) {
   const [refresh, setRefresh] = useState(true);
   const [senderPP, setSenderPP] = useState({});
   const scroll = useRef();
-
-  const { currentUser } = useAuth();
 
   const id =
     sender > recipient ? `${sender + recipient}` : `${recipient + sender}`;
@@ -180,18 +179,6 @@ function Chat({ sender, recipient, setReload }) {
         </Box>
       </Box>
 
-      {/* <Box
-        sx={{
-          overflow: "auto",
-          backgroundColor: "lightgray",
-          height: "71.5vh",
-        }}
-      >
-        <Box
-          padding={"5px"}
-          // // sx={{ display: "flex", flexDirection: "column-reverse" }}
-          sx={{}}
-        > */}
       <Box
         sx={{
           display: "flex",
@@ -215,6 +202,15 @@ function Chat({ sender, recipient, setReload }) {
                     recipientPP={recipientPP.ppurl}
                     senderPP={senderPP.ppurl}
                   />
+                  <Box
+                    sx={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {hasMore && <CircularProgress />}
+                  </Box>
                   <div ref={lastMessElementRef} key={v4()}></div>
                 </>
               );
@@ -231,8 +227,7 @@ function Chat({ sender, recipient, setReload }) {
               );
             }
           })}
-        {/* </Box>
-        </Box> */}
+
         <div
           ref={scroll}
           style={{ width: "10px", height: "2px", padding: "2px" }}

@@ -13,7 +13,6 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-// import AdbIcon from "@mui/icons-material/Adb";
 import { db } from "../firebase";
 import { getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import ForumIcon from "@mui/icons-material/Forum";
@@ -22,9 +21,6 @@ import ListIcon from "@mui/icons-material/List";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ChatIcon from "@mui/icons-material/Chat";
-
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Navbar = () => {
   const { currentUser, logout } = useAuth();
@@ -83,7 +79,6 @@ const Navbar = () => {
     <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
           <Typography
             variant="h6"
             noWrap
@@ -185,7 +180,7 @@ const Navbar = () => {
               exact
               to={`/`}
             >
-              FINKI Student's Pal
+              Student's Pal
             </Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>

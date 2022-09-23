@@ -1,30 +1,11 @@
-import {
-  getDoc,
-  getDocs,
-  collection,
-  addDoc,
-  deleteDoc,
-  doc,
-  setDoc,
-  serverTimestamp,
-} from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import { db, auth, storage } from "../firebase";
-import { Link } from "react-router-dom";
+import { deleteDoc, doc } from "firebase/firestore";
+import React, { useState } from "react";
+import { db } from "../firebase";
 import { getStorage, ref, deleteObject } from "firebase/storage";
-import Moment from "react-moment";
 import {
-  Avatar,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  Collapse,
   IconButton,
   Typography,
   styled,
-  TextField,
   Box,
   Menu,
   MenuItem,
@@ -32,15 +13,7 @@ import {
   Modal,
   Button,
 } from "@mui/material";
-import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
-import SendIcon from "@mui/icons-material/Send";
-import Comment from "./Comment";
-import { v4 } from "uuid";
 import CheckIcon from "@mui/icons-material/Check";
 
 const StyledModal = styled(Modal)({
@@ -107,7 +80,6 @@ function VerticalOptionsButton({
   commentId,
   file,
   subject,
-  filePath,
 }) {
   const storage = getStorage();
   const [anchorEl, setAnchorEl] = React.useState(null);

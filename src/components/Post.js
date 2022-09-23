@@ -2,17 +2,14 @@ import {
   getDoc,
   getDocs,
   collection,
-  addDoc,
-  deleteDoc,
   doc,
   setDoc,
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { db, auth, storage } from "../firebase";
+import { db, auth } from "../firebase";
 import { Link } from "react-router-dom";
-import { listAll, getDownloadURL, ref } from "firebase/storage";
 import Moment from "react-moment";
 import {
   Avatar,
@@ -21,38 +18,23 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
-  Collapse,
   IconButton,
   Typography,
-  styled,
   TextField,
   Box,
-  Menu,
-  MenuItem,
-  alpha,
-  Modal,
-  Button,
 } from "@mui/material";
-import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import SendIcon from "@mui/icons-material/Send";
 import Comment from "./Comment";
 import { v4 } from "uuid";
-import CheckIcon from "@mui/icons-material/Check";
 import VerticalOptionsButton from "./VerticalOptionsButton";
 
 export default function Post(props) {
   const [showComms, setShowComms] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-  const [like, setLike] = useState(false);
-  const [showDelete, setShowDelete] = useState(false);
   const [likeCount, setLikeCount] = useState("");
-  const [post, setPost] = useState();
   const [alreadyLikedPosts, setAlreadyLikedPosts] = useState([]);
 
   const commentsCollectionRef = collection(
@@ -81,22 +63,6 @@ export default function Post(props) {
     }
   }, [comments]);
 
-  // useEffect(() => {
-  //   const getLikes = async () => {
-  //     const data = await getDocs(likesCollectionRef);
-  //     setLikes(data.docs.map((doc) => ({ ...doc.data() })));
-
-  //     getLikes();
-  //   };
-  // }, []);
-
-  // const createNewLike = async () => {
-  //   await addDoc(likesCollectionRef, {
-  //     user: auth.currentUser.email,
-  //     postID: props.post.id,
-  //   });
-  // };
-
   const createNewComment = async () => {
     const id = comments.length + "";
     await setDoc(doc(db, "posts", props.postId, "comments", id), {
@@ -111,28 +77,6 @@ export default function Post(props) {
     await getComments();
   };
 
-  // const toggleLike = () => {
-  //   setLike(!like);
-  //   if (like) {
-  //     createNewLike();
-  //   } else {
-  //     // deleteDoc(doc(db, "likes", `${likeID}`));
-  //   }
-  // };
-
-  // const showLikes = () => {
-  //   let count = 0;
-  //   for (let i = 0; i <= likes.length(); i++) {
-  //     if (
-  //       likes[i].postID === props.post.id &&
-  //       likes[i].user === auth.currentUser.email
-  //     ) {
-  //       count++;
-  //     }
-  //   }
-  //   return count;
-  // };
-
   const toggleLike = async (email) => {
     const post = await getDoc(doc(db, "posts", props.postId));
     const user = await getDoc(doc(db, "users", auth.currentUser.email));
@@ -144,11 +88,10 @@ export default function Post(props) {
     if (likeArray.includes(email)) {
       // filtering the array and removing the like
       newLikeArray = likeArray.filter((like) => like !== email);
-      setLike(false);
+
       setLikeCount(newLikeArray.length);
       newLikedPosts = likedPosts.filter((like) => like !== props.postId);
     } else {
-      setLike(true);
       likeArray.push(email);
       newLikeArray = likeArray;
       setLikeCount(newLikeArray.length);

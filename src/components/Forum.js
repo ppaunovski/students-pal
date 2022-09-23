@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Container, useAccordionButton } from "react-bootstrap";
-import Navigation from "./Navigation";
+import { Container } from "react-bootstrap";
 import NewPost from "./NewPost";
 import {
   getDocs,
@@ -8,16 +7,12 @@ import {
   query,
   orderBy,
   limit,
-  onSnapshot,
   startAfter,
 } from "firebase/firestore";
-import { db, storage } from "../firebase";
+import { db } from "../firebase";
 import Post from "./Post";
-import { listAll, getDownloadURL, ref } from "firebase/storage";
-import { useAuth } from "../contexts/AuthContext";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
-import { v4 } from "uuid";
 
 export default function Forum() {
   const postsCollectionRef = collection(db, "posts");
@@ -127,8 +122,6 @@ export default function Forum() {
               }
             })}
           </div>
-
-          {/* <Button onClick={getPosts}>Load more</Button> */}
         </Container>
       </Container>
     </Box>

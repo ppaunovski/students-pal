@@ -1,35 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
-//import { Form, Button } from "react-bootstrap";
-import { storage, db } from "../firebase";
-import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
-import { v4 } from "uuid";
-import { setDoc, collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
 import SubjectFileCard from "./SubjectFileCard";
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemButton,
-  Button,
-  Modal,
-  Typography,
-} from "@mui/material";
+import { Box, List, ListItem, ListItemButton } from "@mui/material";
 import VerticalOptionsButton from "./VerticalOptionsButton";
 import { useAuth } from "../contexts/AuthContext";
-import AddIcon from "@mui/icons-material/Add";
 import UploadFile from "./UploadFile";
 
 function SubjectPage() {
   const { currentUser } = useAuth();
 
+  const removeLastSlash = (pathname) => {
+    let i = 0;
+    const lastSlash = 7;
+    let slashCount = 0;
+    for (i = 0; i < pathname.length; i++) {
+      if (pathname[i] === "/") slashCount++;
+    }
+    if (slashCount === lastSlash) {
+      return i - 1;
+    }
+    return i;
+  };
+
   const pathname = window.location.pathname;
-  const subject = decodeURIComponent(pathname.slice(43));
+  const subject = decodeURIComponent(
+    pathname.slice(43, removeLastSlash(pathname))
+  );
 
   const [fileList, setFileList] = useState([]);
-
-  const fileListRef = ref(storage, `${subject}/`);
 
   useEffect(() => {
     const getFileNames = async () => {

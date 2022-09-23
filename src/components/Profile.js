@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Card, Alert, Button } from "react-bootstrap";
-import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Navbar from "./Navbar";
-import { db, storage } from "../firebase";
-import { ref, listAll, getDownloadURL } from "firebase/storage";
+import { db } from "../firebase";
 import { getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { Avatar, Box } from "@mui/material";
 
@@ -21,10 +20,6 @@ export default function Profile() {
     });
     await deleteDoc(doc(db, "onlineUsers", `${email}`));
   };
-
-  // const location = useLocation();
-
-  // const { profile } = location.state;
 
   async function handleLogout() {
     setError("");

@@ -3,23 +3,9 @@ import { styled, alpha } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import EditIcon from "@mui/icons-material/Edit";
-import Divider from "@mui/material/Divider";
-import ArchiveIcon from "@mui/icons-material/Archive";
-import FileCopyIcon from "@mui/icons-material/FileCopy";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import {
-  Avatar,
-  Badge,
-  Box,
-  List,
-  ListItem,
-  ListItemButton,
-} from "@mui/material";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
-
-import { Prev } from "react-bootstrap/esm/PageItem";
+import { Avatar, Badge, List, ListItem, ListItemButton } from "@mui/material";
+import { collection, getDocs } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { Link } from "react-router-dom";
@@ -127,12 +113,7 @@ export default function CustomizedMenus({ setReload }) {
             return (
               <Link
                 key={chat.data.chatter}
-                // to={`/profile/${chat.data.chatter}/message`}
                 to={`/messenger/${currentUser.email}/${chat.data.chatter}`}
-                state={{
-                  sender: currentUser.email,
-                  recipient: chat.data.chatter,
-                }}
                 style={{ textDecoration: "none", color: "black" }}
                 onClick={() => setReload(false)}
               >

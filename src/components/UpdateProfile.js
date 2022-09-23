@@ -117,7 +117,7 @@ function UpdateProfile() {
                 <Form.Control
                   type="email"
                   ref={emailRef}
-                  //defaultValue={currentUser.email}
+                  placeholder="Leave blank to keep the same"
                 ></Form.Control>
               </Form.Group>
               <Form.Group id="password">
