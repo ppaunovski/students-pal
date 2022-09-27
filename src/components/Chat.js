@@ -140,7 +140,7 @@ function Chat({ sender, recipient, setReload }) {
   );
 
   return (
-    <Box flex={3} height={"100%"}>
+    <Box flex={recipient ? 3 : 0} height={"100%"}>
       <Box
         sx={{
           backgroundColor: "gray",

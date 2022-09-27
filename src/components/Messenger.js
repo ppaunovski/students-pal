@@ -31,7 +31,7 @@ function Messenger() {
     <>
       <Navbar />
       <Stack direction="row" justifyContent="space-between" overflow={"hidden"}>
-        <RecentChats setRefresh={setRefresh} />
+        <RecentChats setRefresh={setRefresh} recipient={recipient} />
         {recipient && refresh && (
           <Chat sender={sender} recipient={recipient} setReload={setRefresh} />
         )}

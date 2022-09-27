@@ -12,7 +12,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { Link } from "react-router-dom";
 
-function RecentChats({ setRefresh }) {
+function RecentChats({ setRefresh, recipient }) {
   const { currentUser } = useAuth();
   const [activeChats, setActiveChats] = useState([]);
   const [onlineUsers, setOnlineUsers] = useState([]);
@@ -33,7 +33,14 @@ function RecentChats({ setRefresh }) {
   }, []);
 
   return (
-    <Box flex={1} sx={{ display: { xs: "none", sm: "block" } }}>
+    <Box
+      flex={recipient ? 1 : 0}
+      sx={
+        recipient
+          ? { display: { xs: "none", sm: "block" } }
+          : { display: { xs: "block", sm: "block" }, width: "500px" }
+      }
+    >
       <Box sx={{ position: "fixed" }}>
         <List>
           <ListItem>
@@ -49,15 +56,26 @@ function RecentChats({ setRefresh }) {
               >
                 <ListItem sx={{ margin: "0", padding: "2px 3px" }}>
                   <ListItemButton
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                      padding: "0",
-                      margin: "0",
-                      justifyContent: "start",
-                      maxWidth: "20vw",
-                    }}
+                    sx={
+                      recipient
+                        ? {
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "10px",
+                            padding: "0",
+                            margin: "0",
+                            justifyContent: "start",
+                            maxWidth: "20vw",
+                          }
+                        : {
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "10px",
+                            padding: "0",
+                            margin: "0",
+                            justifyContent: "start",
+                          }
+                    }
                   >
                     {chat.data.chatterPP && (
                       <Badge
