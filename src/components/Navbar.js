@@ -82,7 +82,7 @@ const Navbar = () => {
 
   return (
     <AppBar position="sticky">
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" className=" bg-[#522d80] text-gray-300">
         <Toolbar disableGutters>
           <Typography
             variant="h6"
@@ -140,7 +140,7 @@ const Navbar = () => {
               <Link
                 style={{ textDecoration: "none", color: "black" }}
                 exact
-                to={`/`}
+                to={`/forum`}
               >
                 <MenuItem onClick={handleCloseNavMenu}>
                   <ListItemIcon>
@@ -199,7 +199,7 @@ const Navbar = () => {
             <Link
               style={{ textDecoration: "none", color: "white" }}
               exact
-              to={`/`}
+              to={`/forum`}
             >
               <Button
                 onClick={handleCloseNavMenu}

@@ -19,6 +19,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { LoadingButton } from "@mui/lab";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const StyledModal = styled(Modal)({
   display: "flex",
@@ -41,7 +42,7 @@ function UploadFile(props) {
   });
 
   const handleClick = () => {
-    setModal(true);
+    setModal(!modal);
   };
 
   const uploadFiles = async () => {
@@ -86,15 +87,20 @@ function UploadFile(props) {
   }, [loading]);
 
   return (
-    <Box>
-      <Fab
-        sx={{ margin: "15px calc(50vw - 26px) " }}
-        color="primary"
+    <Box onClick={handleClick} className="grid justify-center items-center">
+      <button
+        sx={{
+          margin: "15px calc(50vw - 26px) ",
+          background: "#ae87d0",
+          color: "white",
+        }}
+        className="hover:bg-deepPurple transition-all duration-200 ease-in-out m-4   w-14 h-14 bg-lightPurple rounded-full"
         aria-label="add"
         onClick={handleClick}
       >
-        <AddIcon />
-      </Fab>
+        <AddIcon className="text-white" />
+      </button>
+
       <StyledModal
         open={modal}
         aria-labelledby="modal-modal-title"
@@ -102,11 +108,12 @@ function UploadFile(props) {
       >
         <Box>
           <Box
+            className="bg-black/50 rounded-xl p-4"
             sx={{
               justifyContent: "space-around",
               alignItems: "center",
               maxWidth: "400px",
-              backgroundColor: "gray",
+              // backgroundColor: "#ddd",
               display: "flex",
               flexDirection: "column",
             }}
@@ -119,7 +126,6 @@ function UploadFile(props) {
                 alignItems: "center",
                 width: "350px",
                 backgroundColor: "whitesmoke",
-                margin: "20px",
               }}
               {...getRootProps()}
             >
@@ -145,7 +151,7 @@ function UploadFile(props) {
               </div>
             </Card>
             <Box>
-              <List>
+              <List className="text-white">
                 {filesToUpload &&
                   filesToUpload.map((file) => {
                     return (
@@ -158,20 +164,28 @@ function UploadFile(props) {
                             );
                           }}
                         >
-                          <ClearIcon />
+                          <ClearIcon className="text-white" />
                         </IconButton>
                       </ListItem>
                     );
                   })}
               </List>
             </Box>
-            <LoadingButton
+            <button
+              disabled={loading}
+              onClick={uploadFiles}
+              className="uppercase disabled:bg-gray-500 disabled:text-gray-200 transition-all ease-in-out duration-200 mx-auto bg-deepPurple px-4 py-2 rounded-lg  text-white"
+            >
+              <span>{!loading && "Upload"}</span>
+              {loading && <CircularProgress size="16px" color="secondary" />}
+            </button>
+            {/* <LoadingButton
               onClick={uploadFiles}
               loading={loading}
               variant="contained"
             >
               Upload
-            </LoadingButton>
+            </LoadingButton> */}
           </Box>
         </Box>
       </StyledModal>

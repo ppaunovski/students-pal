@@ -7,7 +7,7 @@ import Navbar from "./Navbar";
 
 export default function Dashboard() {
   return (
-    <Box>
+    <Box className=" bg-[#ddd] ">
       <Navbar />
       <Stack direction="row" justifyContent="space-between" gap={2}>
         <Sidebar />

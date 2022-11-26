@@ -11,6 +11,10 @@ export default function Profile() {
   const { id } = useParams();
   const [error, setError] = useState("");
   const [profilePicture, setProfilePicture] = useState({});
+  const [name, setName] = useState({});
+  const [surname, setSurname] = useState({});
+  const [age, setAge] = useState({});
+  const [semester, setSemester] = useState({});
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -35,19 +39,23 @@ export default function Profile() {
   }
 
   useEffect(() => {
-    const getPP = async () => {
-      const pp = await getDoc(doc(db, "users", `${id}`));
+    const getInfo = async () => {
+      const info = await getDoc(doc(db, "users", `${id}`));
 
-      setProfilePicture(pp.data());
+      setProfilePicture(info.data());
+      setName(info.data());
+      setSurname(info.data());
+      setAge(info.data());
+      setSemester(info.data());
     };
 
-    getPP();
+    getInfo();
   }, []);
 
   return (
-    <>
+    <div className="bg-[#ddd] h-screen">
       <Navbar></Navbar>
-      <Box
+      {/* <Box
         sx={{
           display: "grid",
           justifyContent: "center",
@@ -99,7 +107,48 @@ export default function Profile() {
             )}
           </Card.Footer>
         </Card>
-      </Box>
-    </>
+      </Box> */}
+      <div className="h-[90vh] w-full grid justify-center items-center">
+        <div className="w-[400px] sm:max-w-[500px]  bg-white">
+          <h2 className="text-center p-4">Profile</h2>
+          <div className="mx-auto rounded-full w-20 h-20 border-2 border-solid border-deepPurple flex items-center justify-center">
+            <img className="rounded-full" src={profilePicture.ppurl}></img>
+          </div>
+
+          <div className="p-4">
+            <strong>Name: </strong>
+            {name.name}
+            <br />
+            <strong>Surname: </strong>
+            {surname.surname}
+            <br />
+            <strong>Email: </strong>
+            {id}
+            <br />
+            <strong>Age: </strong>
+            {age.age}
+            <br />
+            <strong>Semester: </strong>
+            {semester.semester}
+            <br />
+          </div>
+          <div className="flex justify-center">
+            {currentUser.email === id ? (
+              <Link to="/update-profile">
+                <button className="mx-auto bg-[#522d80] px-4 py-2 rounded-lg  text-white mb-4">
+                  Update Profile
+                </button>
+              </Link>
+            ) : (
+              <Link to={`/messenger/${currentUser.email}/${id}`}>
+                <button className="mx-auto bg-[#522d80] px-4 py-2 rounded-lg  text-white mb-4">
+                  Message
+                </button>
+              </Link>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

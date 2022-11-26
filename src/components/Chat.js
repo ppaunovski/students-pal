@@ -140,7 +140,7 @@ function Chat({ sender, recipient, setReload }) {
   );
 
   return (
-    <Box flex={recipient ? 3 : 0} height={"100%"}>
+    <Box flex={recipient ? 3 : 0} className="relative">
       <Box
         sx={{
           backgroundColor: "gray",
@@ -149,6 +149,7 @@ function Chat({ sender, recipient, setReload }) {
           justifyContent: "center",
           alignItems: "center",
         }}
+        //className=" flex h-1/7 w-full bg-gray-500 justify-center items-center absolute top-0 z-10"
       >
         <Box
           sx={{
@@ -185,7 +186,7 @@ function Chat({ sender, recipient, setReload }) {
           flexDirection: "column-reverse",
           justifyContent: "end",
           overflowY: "scroll",
-          height: "70.8vh",
+          height: "calc(80vh - 64px)",
           backgroundColor: "lightgray",
         }}
       >
@@ -230,7 +231,7 @@ function Chat({ sender, recipient, setReload }) {
 
         <div
           ref={scroll}
-          style={{ width: "10px", height: "2px", padding: "2px" }}
+          //style={{ width: "10px", height: "2px", padding: "2px" }}
         ></div>
       </Box>
       <Box

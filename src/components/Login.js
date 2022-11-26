@@ -40,53 +40,45 @@ function Login() {
   }
 
   return (
-    <>
-      <div
-        style={{
-          display: "grid",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "100vw",
-          height: "100vh",
-        }}
-      >
-        <Card style={{ width: "400px", margin: "0 auto" }}>
-          <Card.Body>
-            <h2 className="text-center mb-4">Log In</h2>
-            {error && <Alert variant="danger">{error}</Alert>}
-            <Form onSubmit={handleSubmit}>
-              <Form.Group id="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  ref={emailRef}
-                  required
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group id="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  ref={passwordRef}
-                  required
-                ></Form.Control>
-              </Form.Group>
-              <Button disabled={loading} className="w-100 mt-3" type="submit">
-                Log In
-              </Button>
-            </Form>
-            <div className="w-100 text-center mt-3">
-              <Link to="/forgot-password">Forgot password?</Link>
-            </div>
-          </Card.Body>
-          <Card.Footer>
-            <div className="w-100 text-center ">
-              Need an account? <Link to="/signup">Sign Up</Link>
-            </div>
-          </Card.Footer>
-        </Card>
+    <section className="bg-[#ddd] relative w-screen h-screen grid justify-center items-center">
+      <div className="bg-[#eee] sm:max-w-[500px] max-w-[400px] border-gray-300 border-solid border-2 p-5 m-5">
+        {error && <Alert variant="danger">{error}</Alert>}
+        <h2 className="text-center mb-4 text-2xl font-semibold">Sign In</h2>
+
+        <input
+          className="border-solid border-2 border-gray-500 p-2 w-full mt-2 "
+          type="email"
+          placeholder="Email"
+          ref={emailRef}
+          required
+        ></input>
+        <input
+          className="border-solid mb-2 border-2 border-gray-500 p-2 w-full mt-2"
+          type="password"
+          placeholder="Password"
+          ref={passwordRef}
+          required
+        ></input>
+        <Link className="text-blue-500" to="/forgot-password">
+          Forgot password?
+        </Link>
+
+        <div className="mx-auto w-full mt-4 grid justify-center items-center">
+          <button
+            onClick={handleSubmit}
+            className="mx-auto bg-[#522d80] px-4 py-2 rounded-lg  text-white mb-4"
+          >
+            Sign In
+          </button>
+          <p>
+            Dont have an Account?{" "}
+            <Link className="text-blue-500" to="/signup">
+              Sign up
+            </Link>
+          </p>
+        </div>
       </div>
-    </>
+    </section>
   );
 }
 

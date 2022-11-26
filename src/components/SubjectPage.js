@@ -7,9 +7,11 @@ import { Box, List, ListItem, ListItemButton } from "@mui/material";
 import VerticalOptionsButton from "./VerticalOptionsButton";
 import { useAuth } from "../contexts/AuthContext";
 import UploadFile from "./UploadFile";
+import FileCard from "./FileCard";
 
 function SubjectPage() {
   const { currentUser } = useAuth();
+  const [modal, setModal] = useState(false);
 
   const removeLastSlash = (pathname) => {
     let i = 0;
@@ -41,25 +43,30 @@ function SubjectPage() {
   }, []);
 
   return (
-    <Box sx={{ overflow: "hidden" }}>
+    <Box
+      className="bg-[#ddd]"
+      sx={{ overflow: "hidden" }}
+      onClick={() => setModal(false)}
+    >
       <Navbar />
       <h1 style={{ textAlign: "center", margin: "30px", padding: "5px" }}>
         {subject}
       </h1>
       <Box>
         <Box
-          sx={{
-            maxWidth: "500px",
-            maxHeight: "60vh",
-            margin: "0 auto",
-            overflowY: "scroll",
-          }}
+          className="grid justify-center items-center max-h-[60vh] overflow-x-hidden overflow-y-scroll"
+          // sx={{
+          //   maxWidth: "500px",
+          //   maxHeight: "60vh",
+          //   margin: "0 auto",
+          //   overflowY: "scroll",
+          // }}
         >
-          <List>
+          <div className="flex flex-wrap justify-center max-w-[1000px]">
             {fileList.map((file) => {
               return (
                 <>
-                  <ListItem
+                  {/* <ListItem
                     disablePadding
                     sx={{ justifyContent: "space-between" }}
                   >
@@ -82,14 +89,15 @@ function SubjectPage() {
                     ) : (
                       ""
                     )}
-                  </ListItem>
+                  </ListItem> */}
+                  <FileCard file={file} subject={subject} key={file.fileIde} />
                 </>
               );
             })}
-          </List>
+          </div>
         </Box>
         <Box sx={{ margin: "auto" }}>
-          <UploadFile modal={false} subject={subject} />
+          <UploadFile modal={modal} subject={subject} />
         </Box>
       </Box>
     </Box>

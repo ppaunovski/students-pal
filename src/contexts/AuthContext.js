@@ -12,9 +12,12 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  function signup(email, password) {
-    const createUser = async (email) => {
+  function signup(name, surname, username, email, password) {
+    const createUser = async (name, surname, username, email) => {
       await setDoc(doc(db, "users", `${email}`), {
+        name: name,
+        surname: surname,
+        username: username,
         email: email,
         ppurl:
           "https://firebasestorage.googleapis.com/v0/b/social-app-6644b.appspot.com/o/Profile%20pictures%2Fdefault%2Favatar.jpeg?alt=media&token=e8e4f091-46c3-4f1a-a7da-6dbb2d32f829",
@@ -25,7 +28,7 @@ export function AuthProvider({ children }) {
         isOnline: true,
       });
     };
-    createUser(email);
+    createUser(name, surname, username, email);
     return auth.createUserWithEmailAndPassword(email, password);
   }
 

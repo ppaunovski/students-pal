@@ -15,7 +15,7 @@ import {
 
 export default function Semesters() {
   return (
-    <>
+    <div className="bg-[#ddd] h-screen">
       <Navbar />
 
       <Box
@@ -124,6 +124,6 @@ export default function Semesters() {
           <Divider />
         </List>
       </Box>
-    </>
+    </div>
   );
 }

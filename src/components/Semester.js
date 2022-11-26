@@ -71,7 +71,7 @@ export default function Semester() {
   };
 
   return (
-    <>
+    <div className="bg-[#ddd] h-screen">
       <Navbar />
       <Box
         sx={{
@@ -105,16 +105,17 @@ export default function Semester() {
               );
             })}
         </List>
-        <Box>
+        <Box className={!addSubject && "grid justify-center items-center"}>
           {!addSubject ? (
-            <Button
-              variant="outlined"
+            <button
+              className="hover:bg-deepPurple transition-all duration-200 ease-in-out m-4   w-14 h-14 bg-lightPurple rounded-full"
+              aria-label="add"
               onClick={() => {
                 setAddSubject(!addSubject);
               }}
             >
-              Add new subject
-            </Button>
+              <AddIcon className="text-white" />
+            </button>
           ) : (
             <Box>
               <CardActions disableSpacing>
@@ -132,6 +133,7 @@ export default function Semester() {
                     e.preventDefault();
                     addNewSubject() && setAddSubject(!addSubject);
                   }}
+                  color="secondary"
                 >
                   <AddIcon />
                 </Button>
@@ -140,6 +142,6 @@ export default function Semester() {
           )}
         </Box>
       </Box>
-    </>
+    </div>
   );
 }

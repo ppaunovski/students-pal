@@ -37,8 +37,15 @@ function RecentChats({ setRefresh, recipient }) {
       flex={recipient ? 1 : 0}
       sx={
         recipient
-          ? { display: { xs: "none", sm: "block" } }
-          : { display: { xs: "block", sm: "block" }, width: "500px" }
+          ? {
+              display: { xs: "none", sm: "block" },
+              height: "calc(100vh - 70px)",
+            }
+          : {
+              display: { xs: "block", sm: "block" },
+              width: "500px",
+              height: "calc(100vh-70px)",
+            }
       }
     >
       <Box sx={{ position: "fixed" }}>

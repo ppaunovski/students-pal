@@ -16,7 +16,8 @@ import Semester from "./Semester";
 import SubjectPage from "./SubjectPage";
 import Chat from "./Chat";
 import Messenger from "./Messenger";
-
+import "../index.css";
+import LandingPage from "./LandingPage";
 function App() {
   return (
     <>
@@ -27,6 +28,14 @@ function App() {
               <Route
                 exact
                 path="/"
+                element={
+                  //<PrivateRoute>
+                  <LandingPage />
+                  //</PrivateRoute>
+                }
+              />
+              <Route
+                path="/forum"
                 element={
                   <PrivateRoute>
                     <Dashboard />

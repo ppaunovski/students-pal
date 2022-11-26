@@ -29,6 +29,7 @@ import SendIcon from "@mui/icons-material/Send";
 import Comment from "./Comment";
 import { v4 } from "uuid";
 import VerticalOptionsButton from "./VerticalOptionsButton";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 export default function Post(props) {
   const [showComms, setShowComms] = useState(false);
@@ -183,19 +184,17 @@ export default function Post(props) {
           aria-label="like"
           onClick={() => toggleLike(auth.currentUser.email)}
         >
-          <FavoriteIcon
-            sx={
-              alreadyLikedPosts.includes(props.postId) === true
-                ? { color: "red" }
-                : {}
-            }
-          />
+          {alreadyLikedPosts.includes(props.postId) === true ? (
+            <FavoriteIcon className="text-[#ae87d0]" />
+          ) : (
+            <FavoriteBorderIcon />
+          )}
         </IconButton>
         <IconButton
           aria-label="comment"
           onClick={() => setShowComms(!showComms)}
         >
-          <CommentOutlinedIcon />
+          <CommentOutlinedIcon sx={showComms && { color: "#ae87d0" }} />
         </IconButton>
       </CardActions>
 
@@ -218,7 +217,7 @@ export default function Post(props) {
               }}
             />
             <IconButton aria-label="post" onClick={createNewComment}>
-              <SendIcon />
+              <SendIcon className="text-[#ae87d0]" />
             </IconButton>
           </CardActions>
           <Box sx={{ padding: "5px" }}>

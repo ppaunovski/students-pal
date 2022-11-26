@@ -167,7 +167,7 @@ export default function NewPost({ setRefresh }) {
         }}
       >
         <div style={{ margin: "0 auto", width: "56px" }}>
-          <Fab
+          {/* <Fab
             color="primary"
             aria-label="add"
             onClick={(e) => {
@@ -175,7 +175,21 @@ export default function NewPost({ setRefresh }) {
             }}
           >
             <AddIcon />
-          </Fab>
+          </Fab> */}
+          <button
+            sx={{
+              margin: "15px  calc(50vw - 28px) ",
+              background: "#ae87d0",
+              color: "white",
+            }}
+            className="hover:bg-deepPurple transition-all duration-200 ease-in-out    w-14 h-14 bg-lightPurple rounded-full"
+            aria-label="add"
+            onClick={(e) => {
+              setOpen(true);
+            }}
+          >
+            <AddIcon className="text-white" />
+          </button>
         </div>
       </Box>
     </Box>

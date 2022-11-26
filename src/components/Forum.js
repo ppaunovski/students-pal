@@ -92,8 +92,8 @@ export default function Forum() {
     <Box
       flex={3}
       sx={{
-        borderRight: "lightgray 2px solid",
-        borderLeft: "lightgray 2px solid",
+        borderRight: "#522d80 2px solid",
+        borderLeft: "#522d80 2px solid",
       }}
     >
       <Container>
