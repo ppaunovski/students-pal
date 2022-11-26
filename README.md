@@ -79,3 +79,5 @@ using Firebase as a non-relational DataBase, Tailwind for designs,
 using MUI Components aswell as some Bootstrap components.
 
 It's a messy project, but it helped me learn a lot :D
+
+Hosted on GitHub Pages: https://ppaunovski.github.io/students-pal/
